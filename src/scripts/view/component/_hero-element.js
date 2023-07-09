@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unresolved
-import heroImage from '../../../public/images/hero/hero-image.jpg?sizes[]=800,sizes[]=1024,sizes[]=1200';
+import heroImage from '../../../public/images/hero/hero-image.jpg?sizes[]=1080,sizes[]=1200,sizes[]=1350';
 
 // eslint-disable-next-line import/no-unresolved
-import heroImageWebp from '../../../public/images/hero/hero-image.jpg?sizes[]=800,sizes[]=1024,sizes[]=1200&format=webp';
+import heroImageWebp from '../../../public/images/hero/hero-image.jpg?sizes[]=1080,sizes[]=1200,sizes[]=1350&format=webp';
 
 import element from '../../utilities/get-element';
 import createSourceElement from './helper/create-source-element';
