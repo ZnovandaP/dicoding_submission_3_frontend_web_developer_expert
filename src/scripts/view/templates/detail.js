@@ -90,8 +90,6 @@ const detailPageTemplate = {
                 <div class="user-icon">
                   <i
                     class="fa-regular fa-circle-user"
-                    aria-label="icon pengguna"
-                    role="icon"
                   ></i>
                 </div>
                 <form id="form-post-review" autocomplete="off">
@@ -161,7 +159,7 @@ const detailPageTemplate = {
       card += `
         <div class="card-review">
           <div class="user-icon">
-            <i class="fa-solid fa-circle-user" aria-label="Icon pengguna ${name}" role="icon" ></i>
+            <i class="fa-solid fa-circle-user"></i>
           </div>
           <div class="content-review">
             <h3 class="name-review">
