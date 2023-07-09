@@ -28,12 +28,12 @@ class HeroElement extends HTMLElement {
         ${createSourceElement(heroImageWebp, 'webp')}
         ${createSourceElement(heroImage, 'jpg')}
           <img
-            src="${heroImage.src}"
+            data-src="${heroImage.src}"
+            data-srcSet="${heroImage.srcSet}"
             width="${heroImage.width}"
-            srcSet="${heroImage.srcSet}"
             height="${heroImage.height}"
             alt="Gambar aneka ragam makanan di atas meja"
-            class="hero-image"
+            class="lazyload hero-image"
             loading="lazy"
           />
         </picture>
