@@ -51,7 +51,7 @@ class FooterElement extends HTMLElement {
 
         <section class="note-author">
           <h2>
-            <i class="fa-solid fa-code code-icon"></i> Front-end Web Developer
+            <i class="fa-solid fa-code code-icon"></i>dicoding Front-end Web Developer
             Expert
           </h2>
           <h2>
