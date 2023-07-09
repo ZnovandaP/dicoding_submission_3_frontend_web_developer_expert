@@ -17,7 +17,6 @@ class HeroElement extends HTMLElement {
   connectedCallback() {
     this._render();
     this._goToPrologue();
-    console.log(createSourceElement(heroImage));
   }
 
   _render() {
