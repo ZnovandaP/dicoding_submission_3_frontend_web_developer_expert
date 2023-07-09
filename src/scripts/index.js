@@ -1,4 +1,5 @@
 import { async } from 'regenerator-runtime';
+import '@fortawesome/fontawesome-free/css/all.css';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import '../sass/main.scss';
