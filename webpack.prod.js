@@ -30,7 +30,6 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
     new WebpackPwaManifest({
       name: 'Resto Radar',
       short_name: 'Resto Radar',
