@@ -1,0 +1,437 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+main {
+  button.button-like-detail {
+    @include touch-target.base-button();
+    @include placement.flex-layout(column, center, center, 0);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: map-get(colors.$colors, "like");
+    color: map-get(colors.$colors, "background");
+    position: fixed;
+    z-index: 999;
+    font-size: 2.2rem;
+    bottom: 1rem;
+    right: 1rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button.button-like-detail:focus,
+  button.button-like-detail:hover {
+    background-color: #ef4444;
+  }
+
+  button.skip-content.detail {
+    @include touch-target.base-link();
+    @include touch-target.base-button();
+    @include placement.flex-layout(row, center, center, 0);
+    @include text.paragraph-text(
+      1rem,
+      600,
+      map-get(colors.$colors, "text-white")
+    );
+    background-color: map-get(colors.$colors, "secondary");
+    border-radius: 1.5rem;
+    position: fixed;
+    top: 0.25rem;
+    left: 0.5rem;
+    z-index: 0;
+    opacity: 0;
+    width: 65%;
+    padding: 0 10px;
+    @include shadow.box-shadow("md", map-get(colors.$colors, "text-regular"));
+    transition: all 0.3s ease-in-out;
+    // breakpoints
+    @include breakpoints.breakpoints("sm") {
+      width: 45%;
+    }
+    @include breakpoints.breakpoints("md") {
+      width: 40%;
+    }
+    @include breakpoints.breakpoints("lg") {
+      width: 25%;
+    }
+    @include breakpoints.breakpoints("xl") {
+      width: 20%;
+    }
+  }
+
+  button.skip-content.detail:focus {
+    opacity: 1;
+    z-index: 9999;
+    border: 2px solid map-get(colors.$colors, "fourth");
+  }
+
+  .container:focus > h2.detail-title {
+    color: map-get(colors.$colors, "detail");
+    text-decoration: underline;
+  }
+
+  .container {
+    background-color: map-get(colors.$colors, "background");
+    padding: 5.25rem 1rem 3.5rem;
+    // breakpoints
+    @include breakpoints.breakpoints("md") {
+      padding: 5.25rem 3rem 3.5rem;
+    }
+
+    h2.detail-title {
+      @include text.heading-text(1.5rem, map-get(colors.$colors, "primary"));
+      padding-bottom: 1rem;
+      line-height: 2.5rem;
+      text-align: center;
+      // breakpoints
+      @include breakpoints.breakpoints("sm") {
+        font-size: 2rem;
+      }
+    }
+    .detail-restaurant {
+      @include placement.grid-layout(1, 1rem);
+      // breakpoint
+      @include breakpoints.breakpoints("lg") {
+        gap: 2rem;
+      }
+
+      h2 {
+        @include text.heading-text(1.5rem, map-get(colors.$colors, "primary"));
+        letter-spacing: 1.5px;
+        padding: 0.5rem 0;
+        // breakpoint
+        @include breakpoints.breakpoints("lg") {
+          grid-column: 1/-1;
+        }
+      }
+
+      .article-restaurant {
+        @include placement.grid-layout(1, 1rem);
+        border: 1px solid map-get(colors.$colors, "secondary");
+        background-color: map-get(colors.$colors, "background-detail");
+        padding: 1rem 1rem 2rem;
+        border-radius: 1rem;
+        // breakpoint
+        @include breakpoints.breakpoints("lg") {
+          @include placement.grid-layout(2, 1rem);
+          align-items: center;
+        }
+
+        .image-restaurant {
+          @include shadow.box-shadow(
+            "md",
+            map-get(colors.$colors, "text-regular")
+          );
+
+          width: 100%;
+          height: 18rem;
+          object-fit: cover;
+          object-position: center;
+          border-radius: 0.75rem;
+          // breakpoints
+          @include breakpoints.breakpoints("sm") {
+            height: 20rem;
+          }
+          @include breakpoints.breakpoints("md") {
+            height: 24rem;
+          }
+        }
+
+        p::first-letter {
+          @include text.heading-text(
+            1.6rem,
+            map-get(colors.$colors, "primary")
+          );
+        }
+
+        p {
+          @include text.paragraph-text(
+            0.9rem,
+            450,
+            map-get(colors.$colors, "text-regular")
+          );
+          line-height: 1.5rem;
+          text-indent: 2rem;
+          hyphens: auto;
+          letter-spacing: 1px;
+          // breakpoints
+          @include breakpoints.breakpoints("md") {
+            font-size: 0.9rem;
+            line-height: 1.5rem;
+          }
+        }
+      }
+
+      .information {
+        @include placement.grid-layout(1, 1rem);
+        // breakpoint
+        @include breakpoints.breakpoints("lg") {
+          @include placement.grid-layout(2, 1rem);
+          align-items: center;
+        }
+
+        h3 {
+          @include text.paragraph-text(
+            1.2rem,
+            600,
+            #157c5a
+          );
+          letter-spacing: 1px;
+        }
+
+        ul {
+          list-style-type: disc;
+          list-style-position: inside;
+          padding-left: 1.5rem;
+          padding-top: 0.5rem;
+
+          li {
+            @include text.paragraph-text(
+              0.9rem,
+              600,
+              map-get(colors.$colors, "text-regular")
+            );
+            line-height: 1.5rem;
+            letter-spacing: 1px;
+          }
+        }
+
+        .list-menu-restaurant {
+          @include placement.grid-layout(1, 1rem);
+          border: 1px solid map-get(colors.$colors, "secondary");
+          background-color: map-get(colors.$colors, "background-detail");
+          padding: 1rem;
+          border-radius: 1rem;
+          // breakpoint
+          @include breakpoints.breakpoints("md") {
+            @include placement.grid-layout(2, 1rem);
+            align-items: flex-start;
+          }
+
+          h2 {
+            @include breakpoints.breakpoints("md") {
+              grid-column: 1/-1;
+            }
+          }
+        }
+
+        .information-advanced {
+          @include placement.flex-layout(column, center, flex-start, 0.7rem);
+          border: 1px solid map-get(colors.$colors, "secondary");
+          background-color: map-get(colors.$colors, "background-detail");
+          padding: 1rem;
+          border-radius: 1rem;
+
+          p {
+            @include text.paragraph-text(
+              0.9rem,
+              600,
+              map-get(colors.$colors, "text-regular")
+            );
+            line-height: 1.5rem;
+            letter-spacing: 1px;
+            margin-top: 3px;
+          }
+
+          .rate {
+            @include placement.flex-layout(row, center, center, 0.5rem);
+            width: 90px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 1rem;
+            background-color: #082f49;
+            color: #ffd700;
+            margin-top: 0.5rem;
+
+            span {
+              margin: 0;
+              @include text.paragraph-text(
+                0.9rem,
+                600,
+                map-get(colors.$colors, "text-white")
+              );
+            }
+          }
+        }
+
+        .review-section {
+          @include placement.grid-layout(1, 1rem);
+          border: 1px solid map-get(colors.$colors, "secondary");
+          background-color: map-get(colors.$colors, "background-detail");
+          padding: 1rem;
+          border-radius: 1rem;
+          grid-column: 1/-1;
+
+          .note {
+            @include text.paragraph-text(
+              0.8rem,
+              450,
+              map-get(colors.$colors, "text-regular")
+            );
+            line-height: 1.5rem;
+          }
+
+          .card-review-container {
+            @include placement.flex-layout(
+              column,
+              flex-start,
+              flex-start,
+              1rem
+            );
+            width: 100%;
+            padding: 1rem 0;
+            overflow-y: auto;
+
+            .card-review {
+              @include placement.flex-layout(row, flex-start, center, 1rem);
+              width: 100%;
+
+              .user-icon {
+                @include placement.flex-layout(row, center, center, 0);
+                border-radius: 50%;
+                font-size: 3rem;
+                color: map-get(colors.$colors, "text-regular");
+                align-self: flex-start;
+              }
+
+              .content-review {
+                @include placement.flex-layout(
+                  column,
+                  flex-start,
+                  flex-start,
+                  0rem
+                );
+                @include shadow.box-shadow(
+                  "md",
+                  map-get(colors.$colors, "text-regular")
+                );
+                border-radius: 0.5rem;
+                background-color: map-get(
+                  colors.$colors,
+                  "background-card-review"
+                );
+                width: 100%;
+                padding: 0.5rem 1rem;
+                overflow: hidden;
+
+                .name-review {
+                  @include text.paragraph-text(
+                    1.2rem,
+                    600,
+                    map-get(colors.$colors, "text-bold")
+                  );
+                }
+
+                .date-review {
+                  @include text.paragraph-text(
+                    0.8rem,
+                    450,
+                    map-get(colors.$colors, "background")
+                  );
+                  line-height: 1.5rem;
+                }
+                .text-review {
+                  @include text.paragraph-text(
+                    0.9rem,
+                    500,
+                    map-get(colors.$colors, "text-regular")
+                  );
+                  line-height: 1.5rem;
+                  letter-spacing: 1px;
+                }
+              }
+            }
+          }
+
+          .form-add-review {
+            @include placement.flex-layout(column, center, center, 1rem);
+            width: 100%;
+            // breakpoint
+            @include breakpoints.breakpoints("sm") {
+              @include placement.flex-layout(row, flex-start, center, 1rem);
+            }
+            .user-icon {
+              @include placement.flex-layout(row, center, center, 0);
+              border-radius: 50%;
+              font-size: 3rem;
+              color: map-get(colors.$colors, "text-regular");
+              @include breakpoints.breakpoints("sm") {
+                align-self: flex-start;
+              }
+            }
+
+            form {
+              @include placement.flex-layout(column, center, center, 1rem);
+              width: 100%;
+
+              input,
+              textarea,
+              button {
+                width: 100%;
+              }
+
+              input,
+              textarea {
+                box-sizing: border-box;
+                @include text.paragraph-text(
+                  0.8rem,
+                  600,
+                  map-get(colors.$colors, "text-regular")
+                );
+                letter-spacing: 1px;
+                border: 1px solid map-get(colors.$colors, "fourth");
+                display: block;
+                width: 100%;
+                min-height: 44px;
+                border-radius: 0.5rem;
+                padding: 0 0.7rem;
+                transition: all 0.3s ease-in-out;
+              }
+
+              textarea#review-input {
+                padding: 0.7rem;
+                resize: vertical;
+                line-height: 1.5rem;
+              }
+
+              input:focus,
+              textarea:focus {
+                border-width: 3px;
+              }
+
+              button {
+                @include touch-target.base-button();
+                @include touch-target.base-link();
+                @include placement.flex-layout(row, center, center, 0.25rem);
+                @include text.paragraph-text(
+                  0.9rem,
+                  600,
+                  map-get(colors.$colors, "text-white")
+                );
+                background-color: map-get(colors.$colors, "danger");
+                letter-spacing: 1px;
+                text-align: center;
+                padding: 0 1rem;
+                width: 100%;
+                border-radius: 0.5rem;
+                border: 2px solid transparent;
+                transition: all 0.3s ease-in-out;
+              }
+
+              button:hover,
+              button:focus {
+                border: 2px solid map-get(colors.$colors, "text-regular");
+                background-color: #be123c;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

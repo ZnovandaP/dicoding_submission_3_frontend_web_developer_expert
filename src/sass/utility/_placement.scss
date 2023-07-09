@@ -1,0 +1,13 @@
+@mixin flex-layout($direction, $x-axis, $y-axix, $gap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $x-axis;
+  align-items: $y-axix;
+  gap: $gap;
+}
+
+@mixin grid-layout($column, $gap){
+  display: grid;
+  grid-template-columns: repeat($column, minmax(0, 1fr));
+  gap: $gap;
+}

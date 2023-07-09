@@ -1,0 +1,245 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+
+/* Implementing Mobile First Approach */
+.modal-freeze-page {
+  overflow: hidden;
+}
+
+.modal-parent.overlay.block {
+  display: block;
+}
+
+.modal-parent.overlay.show-modal {
+  opacity: 1;
+}
+
+.modal-parent.overlay {
+  display: none;
+  opacity: 0;
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(10px);
+  background-color: #111827b9;
+  transition: all 0.5s ease-in-out;
+
+  .modal {
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 85vh;
+    overflow: hidden;
+    background-color: map-get(colors.$colors, "background");
+
+    .modal-head {
+      @include placement.flex-layout(row, space-between, center, 0);
+      border-bottom: 1px solid map-get(colors.$colors, "text-bold");
+      height: 10%;
+
+      .modal-title {
+        margin-left: 1rem;
+        @include text.heading-text(0.95rem, map-get(colors.$colors, "primary"));
+        // breakpoints
+        @include breakpoints.breakpoints("sm") {
+          @include text.heading-text(
+            1.25rem,
+            map-get(colors.$colors, "primary")
+          );
+        }
+      }
+
+      .modal-button-close {
+        @include text.paragraph-text(
+          1.75rem,
+          600,
+          map-get(colors.$colors, "danger")
+        );
+        @include touch-target.base-button();
+        background-color: transparent;
+        border-radius: 50%;
+        margin-right: 1rem;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .modal-button-close:hover {
+        color: #fb7185;
+      }
+      .modal-button-close:focus {
+        color: #fb7185;
+        background-color: #4b5563;
+      }
+    }
+
+    .modal-body {
+      @include placement.grid-layout(1, 2rem);
+      height: 80%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      // breakpoints
+      @include breakpoints.breakpoints("lg") {
+        @include placement.grid-layout(2, 1rem);
+      }
+
+      section.left {
+        @include placement.flex-layout(column, center, center, 0);
+        height: 100%;
+        padding: 0.75rem;
+
+        .modal-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 1rem;
+          object-fit: cover;
+          object-position: center;
+          @include shadow.box-shadow(
+            "md",
+            map-get(colors.$colors, "text-regular")
+          );
+        }
+      }
+
+      section.right {
+        @include placement.grid-layout(1, 1rem);
+        padding: 1rem;
+        // breakpoints
+        @include breakpoints.breakpoints("lg") {
+          padding-top: 1.5rem;
+          padding-left: 0;
+        }
+
+        h2.title {
+          @include text.heading-text(
+            1rem,
+            map-get(colors.$colors, "secondary")
+          );
+          position: relative;
+        }
+
+        h3 {
+          @include text.paragraph-text(
+            0.95rem,
+            600,
+            map-get(colors.$colors, "text-regular")
+          );
+          margin-left: 1.5rem;
+          margin-top: 0.75rem;
+          line-height: 1.25rem;
+        }
+
+        .rate-restaurant > h3 {
+          width: 5rem;
+          background-color: #082f49;
+          padding: 0.5rem 0;
+          text-align: center;
+          color: map-get(colors.$colors, "text-white");
+          border-radius: 1rem;
+
+          .star {
+            color: map-get(colors.$colors, "fourth");
+          }
+        }
+
+        .description-restaurant {
+          p.description-text::first-letter {
+            @include text.heading-text(
+              1.5rem,
+              map-get(colors.$colors, "primary")
+            );
+          }
+
+          p.description-text {
+            @include text.paragraph-text(
+              0.85rem,
+              500,
+              map-get(colors.$colors, "text-regular")
+            );
+            line-height: 1.2rem;
+            text-indent: 1.5rem;
+            hyphens: auto;
+            text-align: justify;
+            margin: 0.75rem 0;
+
+            // breakpoints
+            @include breakpoints.breakpoints("md") {
+              font-size: 0.9rem;
+              line-height: 1.5rem;
+            }
+            @include breakpoints.breakpoints("lg") {
+              padding-left: 0;
+              padding-right: 0.3rem;
+            }
+          }
+        }
+        .buttons-modal {
+          @include placement.flex-layout(row, center, center, 0.5rem);
+          // width: 80%;
+          .button-like-modal,
+          .button-detail-restaurant-modal {
+            @include touch-target.base-button();
+            @include touch-target.base-link();
+            @include placement.flex-layout(row, center, center, 0.25rem);
+            @include text.paragraph-text(
+              0.8rem,
+              600,
+              map-get(colors.$colors, "text-white")
+            );
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 0 1rem;
+            width: 100%;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease-in-out;
+          }
+          .button-like-modal {
+            background-color: map-get(colors.$colors, "like");
+          }
+          .button-detail-restaurant-modal {
+            background-color: map-get(colors.$colors, "detail");
+          }
+          .button-like-modal:hover,
+          .button-like-modal:focus {
+            background-color: #d3334b;
+          }
+          .button-detail-restaurant-modal:hover,
+          .button-detail-restaurant-modal:focus {
+            background-color: #1fb485;
+          }
+        }
+      }
+    }
+    .modal-foot {
+      @include placement.flex-layout(row, center, center, 0);
+      border-top: 1px solid map-get(colors.$colors, "text-bold");
+      height: 10%;
+
+      p {
+        @include text.heading-text(0.95rem, map-get(colors.$colors, "primary"));
+        // breakpoints
+        @include breakpoints.breakpoints("sm") {
+          @include text.heading-text(
+            1.25rem,
+            map-get(colors.$colors, "primary")
+          );
+        }
+
+        span {
+          font-family: map-get(fonts.$fonts, "text");
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

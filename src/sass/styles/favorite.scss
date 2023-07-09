@@ -1,0 +1,106 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+main {
+  button.skip-content.favorite {
+    @include touch-target.base-link();
+    @include touch-target.base-button();
+    @include placement.flex-layout(row, center, center, 0);
+    @include text.paragraph-text(
+      1rem,
+      600,
+      map-get(colors.$colors, "text-white")
+    );
+    background-color: map-get(colors.$colors, "secondary");
+    border-radius: 1.5rem;
+    position: fixed;
+    top: 0.25rem;
+    left: 0.5rem;
+    z-index: 0;
+    opacity: 0;
+    width: 65%;
+    padding: 0 10px;
+    @include shadow.box-shadow("md", map-get(colors.$colors, "text-regular"));
+    transition: all 0.3s ease-in-out;
+    // breakpoints
+    @include breakpoints.breakpoints("sm") {
+      width: 45%;
+    }
+    @include breakpoints.breakpoints("md") {
+      width: 40%;
+    }
+    @include breakpoints.breakpoints("lg") {
+      width: 25%;
+    }
+    @include breakpoints.breakpoints("xl") {
+      width: 20%;
+    }
+  }
+
+  button.skip-content.favorite:focus {
+    opacity: 1;
+    z-index: 9999;
+    border: 2px solid map-get(colors.$colors, "fourth");
+  }
+
+  .content-favorite:focus > .title > h2 {
+    color: map-get(colors.$colors, "fourth");
+    text-decoration: underline;
+  }
+  
+  section.content-favorite {
+    @include placement.flex-layout(column, flex-start, center, 1rem);
+    min-height: 100vh;
+    padding: 5.5rem 1rem 2.5rem;
+    background-color: map-get(colors.$colors, "primary");
+    position: relative;
+    // breakpoints
+    @include breakpoints.breakpoints("lg") {
+      padding: 5.5rem 1.75rem 2.5rem;
+    }
+
+    .note-data-empty {
+      @include placement.flex-layout(column, center, center, 1rem);
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      i {
+        color: map-get(colors.$colors, "fourth");
+        font-size: 3rem;
+      }
+
+      h3 {
+        @include text.paragraph-text(
+          1.2rem,
+          600,
+          map-get(colors.$colors, "text-white")
+        );
+        letter-spacing: 1px;
+        line-height: 1.5rem;
+      }
+    }
+
+    .title > h2 {
+      @include text.heading-text(
+        1.75rem,
+        map-get(colors.$colors, "text-white")
+      );
+      line-height: 2.5rem;
+      text-align: center;
+      // breakpoints
+      @include breakpoints.breakpoints("sm") {
+        font-size: 2rem;
+      }
+    }
+  }
+}

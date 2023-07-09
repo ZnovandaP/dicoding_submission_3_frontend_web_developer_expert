@@ -1,0 +1,342 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+//component
+@use "../component/button";
+
+/* Implementing Mobile First Approach */
+
+header {
+  position: relative;
+
+  nav.active {
+    background-color: map-get(colors.$colors, "background");
+    @include shadow.box-shadow("md", map-get(colors.$colors, "text-regular"));
+    position: fixed;
+    top: 0;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+
+    .nav-list {
+      background-color: map-get(colors.$colors, "background");
+      border: 2px solid map-get(colors.$colors, "primary");
+      //breakpoints
+      @include breakpoints.breakpoints("md") {
+        border: none;
+      }
+      .nav-link {
+        color: map-get(colors.$colors, "text-regular");
+      }
+    }
+  }
+
+  nav {
+    @include placement.flex-layout(row, space-between, center, 0);
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    height: 55px;
+    padding: 0.25rem 0;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    // breakpoints
+    @include breakpoints.breakpoints("md") {
+      @include placement.flex-layout(row, space-between, center, 0rem);
+    }
+
+    .logo {
+      @include placement.flex-layout(row, center, center, 8px);
+      margin-left: 1rem;
+      position: relative;
+      // breakpoints
+      @include breakpoints.breakpoints("lg") {
+        margin-left: 3rem;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+      h1 {
+        @include text.heading-text(
+          1.2rem,
+          map-get(colors.$colors, "text-bold")
+        );
+        color: map-get(colors.$colors, "secondary");
+      }
+    }
+
+    button.hum-button {
+      @include touch-target.base-button();
+      @include placement.flex-layout(row, center, center, 0);
+      margin-right: 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease-in-out;
+      @include breakpoints.breakpoints("md") {
+        display: none;
+      }
+
+      i.button-icon {
+        font-size: 1.75rem;
+        color: map-get(colors.$colors, "secondary");
+        transition: all 0.3s ease-in-out;
+      }
+
+      //transition when button click
+      i.button-icon.fade {
+        opacity: 1;
+      }
+      i.button-icon.not-fade {
+        opacity: 0;
+      }
+    }
+
+    button.hum-button:hover > i {
+      color: map-get(colors.$colors, "tertiary");
+      scale: 1.1;
+    }
+
+    button.hum-button:focus > i {
+      color: map-get(colors.$colors, "tertiary");
+      scale: 1.1;
+    }
+
+    button.hum-button:focus {
+      border: 1px solid map-get(colors.$colors, "secondary");
+    }
+
+    .nav-list {
+      @include shadow.box-shadow("lg", map-get(colors.$colors, "text-regular"));
+      display: none;
+      padding: 1.5rem 0;
+      position: absolute;
+      top: 4.6rem;
+      right: 0.8rem;
+      transform: translateX(120%);
+      width: 60%;
+      height: 18rem;
+      border-radius: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      transition: all 0.5s ease-in-out;
+      // breakpoints
+      @include breakpoints.breakpoints("md") {
+        @include placement.flex-layout(row, space-between, center, 1.5rem);
+        margin-right: 1rem;
+        transform: translateX(0);
+        width: 55%;
+        height: 100%;
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+        position: static;
+        top: 0;
+        right: 0;
+        padding: 0;
+      }
+      @include breakpoints.breakpoints("lg") {
+        margin-right: 3rem;
+      }
+    }
+
+    .nav-list.open {
+      transform: translateX(0%);
+    }
+
+    .nav-list.show {
+      @include placement.flex-layout(column, center, center, 1.5rem);
+      transition: all 0.5s ease-in-out;
+      @include breakpoints.breakpoints("md") {
+        @include placement.flex-layout(row, space-between, center, 0);
+        margin-right: 1rem;
+        transform: translateX(0);
+        width: 55%;
+        height: 100%;
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+        position: static;
+        top: 0;
+        right: 0;
+        padding: 0;
+      }
+      @include breakpoints.breakpoints("lg") {
+        margin-right: 3rem;
+      }
+    }
+
+    li {
+      position: relative;
+
+      a.nav-link {
+        @include touch-target.base-link();
+        @include text.paragraph-text(
+          1rem,
+          500,
+          map-get(colors.$colors, "text-regular")
+        );
+        color: map-get(colors.$colors, "text-white");
+      }
+
+      a.nav-link::after {
+        content: "";
+        position: absolute;
+        background-color: map-get(colors.$colors, "tertiary");
+        top: 2.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0.5rem;
+        width: 0;
+        height: 4px;
+        transition: all 0.3s ease-in-out;
+      }
+      a.nav-link:hover::after,
+      a.nav-link:focus::after {
+        width: 40%;
+      }
+
+      a.nav-link:hover,
+      a.nav-link:focus {
+        font-weight: 600;
+      }
+
+      a.nav-link.active::after {
+        content: "";
+        display: block;
+        position: absolute;
+        background-color: map-get(colors.$colors, "tertiary");
+        top: 2.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0.5rem;
+        width: 40%;
+        height: 4px;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+
+  .hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+
+    button.skip-content.home {
+      @include touch-target.base-link();
+      @include touch-target.base-button();
+      @include placement.flex-layout(row, center, center, 0);
+      @include text.paragraph-text(
+        1rem,
+        600,
+        map-get(colors.$colors, "text-white")
+      );
+      background-color: map-get(colors.$colors, "secondary");
+      border-radius: 1.5rem;
+      position: absolute;
+      top: 5rem;
+      left: 1rem;
+      z-index: -10;
+      opacity: 0;
+      width: 65%;
+      padding: 0 10px;
+      @include shadow.box-shadow("md", map-get(colors.$colors, "text-regular"));
+      transition: all 0.3s ease-in-out;
+      // breakpoints
+      @include breakpoints.breakpoints("sm") {
+        width: 45%;
+      }
+      @include breakpoints.breakpoints("md") {
+        width: 40%;
+      }
+      @include breakpoints.breakpoints("lg") {
+        width: 25%;
+      }
+      @include breakpoints.breakpoints("xl") {
+        width: 20%;
+      }
+    }
+
+    button.skip-content:focus {
+      opacity: 1;
+      z-index: 10;
+      border: 2px solid map-get(colors.$colors, "fourth");
+    }
+
+    .hero-image {
+      @include text.paragraph-text(
+        2rem,
+        500,
+        map-get(colors.$colors, "danger")
+      );
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      // breakpoints
+      @include breakpoints.breakpoints("xl") {
+        min-width: 1000px;
+      }
+    }
+
+    .overlay {
+      @include placement.flex-layout(column, center, center, 1rem);
+      position: absolute;
+      top: 0;
+      background-color: rgba(17, 24, 39, 0.75);
+      width: 100%;
+      height: 100%;
+
+      h2,
+      h3 {
+        color: map-get(colors.$colors, "text-white");
+        text-align: center;
+      }
+
+      h2 {
+        @include text.heading-text(2.5rem, map-get(colors.$colors, "tertiary"));
+        // breakpoints
+        @include breakpoints.breakpoints("md") {
+          font-size: 3rem;
+        }
+        @include breakpoints.breakpoints("lg") {
+          font-size: 4rem;
+        }
+      }
+
+      h3 {
+        @include text.paragraph-text(
+          1.2rem,
+          500,
+          map-get(colors.$colors, "text-white")
+        );
+        padding: 0 0.25rem;
+        line-height: 1.5rem;
+        // breakpoints
+        @include breakpoints.breakpoints("md") {
+          font-size: 1.5rem;
+          line-height: 2.5rem;
+        }
+        @include breakpoints.breakpoints("lg") {
+          font-size: 2rem;
+          line-height: 3rem;
+        }
+      }
+    }
+  }
+}

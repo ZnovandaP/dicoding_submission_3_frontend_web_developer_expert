@@ -1,0 +1,102 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+footer {
+  @include placement.flex-layout(column, center, center, 1rem);
+  background-color: map-get(colors.$colors, "background-footer");
+
+  section.company-footer {
+    padding: 1rem 1rem 0.5rem;
+    @include placement.flex-layout(column, space-between, center, 0.25rem);
+
+    .logo {
+      background-color: rgba(0, 44, 34, 0.3);
+      padding: 0.5rem 2rem;
+      border-radius: 3rem 0 3rem 0;
+      @include placement.flex-layout(row, space-between, center, 0.25rem);
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      h2 {
+        @include text.heading-text(
+          1.5rem,
+          map-get(colors.$colors, "secondary")
+        );
+        width: 100%;
+      }
+    }
+    .company-copyright {
+      h2 {
+        @include text.heading-text(
+          0.9rem,
+          map-get(colors.$colors, "text-white")
+        );
+        letter-spacing: 1px;
+        text-align: center;
+
+        .year {
+          @include text.paragraph-text(
+            0.9rem,
+            800,
+            map-get(colors.$colors, "text-white")
+          );
+        }
+        .company-name {
+          @include text.heading-text(
+            1rem,
+            map-get(colors.$colors, "text-white")
+          );
+        }
+      }
+    }
+  }
+
+  .line-footer {
+    width: 100%;
+    height: 2.5px;
+    background-color: map-get(colors.$colors, "fourth");
+  }
+
+  .note-author {
+    @include placement.grid-layout(1, 0.75rem);
+    justify-items: center;
+    align-items: center;
+    padding: 1rem 0 1.5rem;
+    width: 100%;
+    letter-spacing: 1px;
+
+    // breakpoints
+    @include breakpoints.breakpoints("sm") {
+      @include placement.grid-layout(2, 1.25rem);
+      justify-items: s;
+    }
+
+    h2 {
+      @include text.paragraph-text(
+        0.9rem,
+        600,
+        map-get(colors.$colors, "text-white")
+      );
+      text-align: center;
+      line-height: 1rem;
+
+      .code-icon {
+        color: #0c6efc;
+      }
+
+      .heart-icon {
+        color: map-get(colors.$colors, "danger");
+      }
+    }
+  }
+}

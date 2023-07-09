@@ -1,0 +1,157 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+main {
+  section.contact {
+    width: 100%;
+    padding-bottom: 1.5rem;
+
+    .title > h2 {
+      padding: 6rem 1rem 0;
+      @include text.heading-text(1.75rem, map-get(colors.$colors, "primary"));
+      line-height: 2.5rem;
+      // breakpoints
+      @include breakpoints.breakpoints("sm") {
+        font-size: 2rem;
+      }
+      @include breakpoints.breakpoints("md") {
+        text-align: center;
+        padding: 6rem 0 1rem;
+      }
+    }
+
+    form.form-container {
+      padding: 1rem;
+      @include placement.grid-layout(1, 1.5rem);
+      // breakpoints
+      @include breakpoints.breakpoints("md") {
+        @include placement.grid-layout(2, 1.5rem);
+      }
+      @include breakpoints.breakpoints("lg") {
+        padding: 1.75rem;
+      }
+
+      .line-form.satu {
+        @include breakpoints.breakpoints("md") {
+          display: none;
+        }
+      }
+      .line-form.dua {
+        @include breakpoints.breakpoints("md") {
+          display: none;
+        }
+      }
+      .line-form.tiga {
+        @include breakpoints.breakpoints("md") {
+          grid-column: span 2 / span 2;
+        }
+      }
+
+      .line-form {
+        display: inline-block;
+        background-color: map-get(colors.$colors, "text-regular");
+        margin-left: 0.25rem;
+        width: 100%;
+        height: 2px;
+      }
+
+      .input-field.message {
+        @include breakpoints.breakpoints("md") {
+          grid-column: span 2 / span 2;
+        }
+      }
+
+      .input-field {
+        @include placement.flex-layout(column, center, center, 1rem);
+        position: relative;
+
+        input,
+        textarea {
+          @include text.paragraph-text(
+            0.9rem,
+            600,
+            map-get(colors.$colors, "text-regular")
+          );
+          letter-spacing: 1px;
+          display: block;
+          width: 95%;
+          min-height: 44px;
+          border-radius: 1rem;
+          border: 1px solid map-get(colors.$colors, "primary");
+          padding-left: 1rem;
+          transition: all 0.3s ease-in-out;
+        }
+        input::placeholder,
+        textarea::placeholder {
+          opacity: 1;
+        }
+        input:focus,
+        textarea:focus {
+          border: 3px solid map-get(colors.$colors, "primary");
+        }
+
+        #message {
+          height: 5rem;
+          padding-top: 1rem;
+          padding-right: 1rem;
+          width: 94%;
+        }
+
+        label {
+          cursor: pointer;
+          align-self: flex-start;
+          @include text.paragraph-text(
+            1rem,
+            600,
+            map-get(colors.$colors, "text-regular")
+          );
+        }
+
+        p.message-text {
+          @include text.paragraph-text(
+            0.9rem,
+            800,
+            map-get(colors.$colors, "danger")
+          );
+          letter-spacing: 1px;
+          margin-left: 0.25rem;
+        }
+
+        .message-text.show-notification {
+          display: block;
+        }
+        .message-text.hide-notification {
+          display: none;
+        }
+      }
+
+      .button-submit.not-allowed {
+        border: 2px solid map-get(colors.$colors, "text-regular");
+        cursor: not-allowed;
+        opacity: 0.5;
+        transition: all 0.3s ease-in-out;
+        //breakpoints
+        @include breakpoints.breakpoints("md") {
+          grid-column-start: 2;
+          justify-self: flex-end;
+        }
+      }
+      .button-submit.allowed {
+        cursor: pointer;
+        opacity: 1;
+        //breakpoints
+        @include breakpoints.breakpoints("md") {
+          grid-column-start: 2;
+          justify-self: flex-end;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@use '../utility/placement';
+@use '../utility/text';
+
+@mixin button ($txt-color, $bg-color, $border-color) {
+  @include placement.flex-layout(column, center, center, 0);
+  @include text.paragraph-text(
+    0.9rem,
+    600,
+    #{$txt-color}
+  );
+  background-color: $bg-color;
+  padding: 0 1.5rem;
+  border-radius: 3rem 0 3rem 0;
+  border: 2px solid $border-color;
+  transition: all .3s ease-in-out;
+}
+
+@mixin button-hover($bg-color) {
+  background-color: $bg-color;
+}

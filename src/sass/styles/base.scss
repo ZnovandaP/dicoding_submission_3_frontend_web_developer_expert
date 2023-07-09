@@ -1,0 +1,113 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+@use "../component/card";
+/* ================================= */
+@use "./header.scss";
+@use "./main-prologue.scss";
+@use "./main-content.scss";
+@use "./main-input.scss";
+@use "./modal.scss";
+@use "./footer.scss";
+@use "./detail.scss";
+@use "./favorite.scss";
+@use "./skeleton.scss";
+
+/* Implementing Mobile First Approach */
+
+
+*, html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+  main {
+    min-height: 90vh
+  }
+/* ================================= */
+// common button
+.button {
+  @include touch-target.base-link();
+  @include touch-target.base-button();
+  @include button.button(
+    map-get(colors.$colors, "text-white"),
+    map-get(colors.$colors, "primary"),
+    map-get(colors.$colors, "text-white")
+  );
+  letter-spacing: 1px;
+  // breakpoints
+  @include breakpoints.breakpoints("md") {
+    font-size: 1.1rem;
+    line-height: 2.5rem;
+  }
+}
+.button:hover,
+.button:focus {
+  @include button.button-hover(map-get(colors.$colors, "secondary"));
+}
+
+.line {
+  display: inline-block;
+  background-color: map-get(colors.$colors, "text-regular");
+  margin-left: 0.25rem;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* ================================= */
+// alert
+.title-alert {
+  @include text.heading-text(1.75rem, map-get(colors.$colors, "primary"));
+  letter-spacing: 1.5px;
+}
+
+.title-alert-error {
+  @include text.heading-text(1.75rem, map-get(colors.$colors, "danger"));
+  letter-spacing: 1.5px;
+}
+
+.title-alert-question {
+  @include text.heading-text(1.75rem, map-get(colors.$colors, "preview"));
+  letter-spacing: 1.5px;
+}
+
+.text-alert {
+  @include text.paragraph-text(
+    1.1rem,
+    600,
+    map-get(colors.$colors, "secondary")
+  );
+  letter-spacing: 1px;
+}
+
+div.swal2-container.swal2-bottom.toast-container {
+  width: 90%;
+  // breakpoint
+  @include breakpoints.breakpoints("sm") {
+    width: 75%;
+  }
+  @include breakpoints.breakpoints("md") {
+    width: 55%;
+  }
+  @include breakpoints.breakpoints("lg") {
+    width: 45%;
+    padding-bottom: 1.5rem; 
+  }
+}
+button.alert-button {
+  @include touch-target.base-link();
+  @include touch-target.base-button();
+  @include text.paragraph-text(
+    0.9rem,
+    600,
+    map-get(colors.$colors, "text-white")
+  );
+}

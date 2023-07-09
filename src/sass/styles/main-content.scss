@@ -1,0 +1,44 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+
+main {
+  .content:focus > .title>h2 {
+    color: map-get(colors.$colors, "fourth");
+    text-decoration: underline;
+  }
+  section.content {
+    @include placement.flex-layout(column, center, flex-start, 1rem);
+    padding: 2rem 1rem;
+    min-height: 640px;
+    background-color: map-get(colors.$colors, "primary");
+    scroll-padding-top: 10rem;
+    // breakpoints
+    @include breakpoints.breakpoints("sm") {
+      @include placement.flex-layout(column, center, center, 1rem);
+    }
+    @include breakpoints.breakpoints("lg") {
+      padding: 1.75rem;
+    }
+
+    .title > h2 {
+      @include text.heading-text(
+        1.75rem,
+        map-get(colors.$colors, "text-white")
+      );
+      line-height: 2.5rem;
+      // breakpoints
+      @include breakpoints.breakpoints("sm") {
+        font-size: 2rem;
+      }
+    }
+
+  }
+}

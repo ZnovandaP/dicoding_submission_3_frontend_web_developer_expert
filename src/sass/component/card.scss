@@ -1,0 +1,257 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+.card-container, .card-container-favorite {
+  @include placement.grid-layout(1, 1rem);
+  width: 100%;
+  // breakpoints
+  @include breakpoints.breakpoints("sm") {
+    @include placement.grid-layout(2, 1rem);
+  }
+  @include breakpoints.breakpoints("lg") {
+    @include placement.grid-layout(3, 1rem);
+    padding: 1.2rem;
+  }
+  @include breakpoints.breakpoints("xl") {
+    @include placement.grid-layout(4, 1rem);
+  }
+
+  .card:hover,
+  .card:focus {
+    transform: scale(0.98);
+  }
+
+  .card:hover .card-image,
+  .card:focus .card-image {
+    transform: scale(1.3);
+  }
+
+  .card {
+    position: relative;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    min-width: 250px;
+    min-height: 16rem;
+    @include shadow.box-shadow(
+      "lg",
+      map-get(colors.$colors, "text-regular")
+    );
+
+    .card-image {
+      @include text.paragraph-text(
+        1rem,
+        500,
+        map-get(colors.$colors, "text-white")
+      );
+      width: 100%;
+      height: 16rem;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .overlay {
+      @include placement.flex-layout(column, flex-end, flex-start, 0);
+      position: absolute;
+      top: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 30%,
+        rgba(255, 255, 255, 0.2) 90%
+      );
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+
+      .rate {
+        @include placement.flex-layout(row, center, center, 0.5rem);
+        padding: 0.75rem;
+        border-radius: 0 0.75rem 0 0.75rem;
+        cursor: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        .star {
+          color: map-get(colors.$colors, "fourth");
+        }
+
+        p {
+          @include text.paragraph-text(
+            0.9rem,
+            600,
+            map-get(colors.$colors, "text-white")
+          );
+          cursor: auto;
+        }
+      }
+
+      .wrapper-card-menu.open {
+        opacity: 1;
+      }
+      .wrapper-card-menu.show {
+        display: block;
+      }
+      .wrapper-card-menu {
+        display: none;
+        position: absolute;
+        top: 2rem;
+        left: 3.5rem;
+        min-width: 65%;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        button {
+          @include touch-target.base-button();
+          @include text.paragraph-text(
+            0.8rem,
+            500,
+            map-get(colors.$colors, "text-regular")
+          );
+          letter-spacing: 1px;
+          padding: 0 1rem;
+          width: 100%;
+          transition: all 0.3s ease-in-out;
+        }
+        .button-close {
+          @include placement.flex-layout(column, center, center, 0);
+          @include touch-target.base-button();
+          @include text.paragraph-text(
+            1.85rem,
+            900,
+            map-get(colors.$colors, "text-white")
+          );
+          background-color: map-get(colors.$colors, "danger");
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          position: absolute;
+          top: -1.25rem;
+          left: -3rem;
+          z-index: 2;
+          transition: all 0.3s ease-in-out;
+        }
+
+        .button-close:hover,
+        .button-close:focus {
+          background-color: #fb7185;
+        }
+
+        .card-menu {
+          @include shadow.box-shadow(
+            "md",
+            map-get(colors.$colors, "text-regular")
+          );
+          @include placement.flex-layout(column, center, center, 0);
+          width: 100%;
+          background-color: map-get(colors.$colors, "background");
+          border-radius: 0.5rem;
+          overflow: hidden;
+          transition: all 0.3s ease-in-out;
+
+          .button-like:hover,
+          .button-like:focus {
+            background-color: map-get(colors.$colors, "like");
+            @include text.paragraph-text(
+              0.9rem,
+              600,
+              map-get(colors.$colors, "text-white")
+            );
+          }
+          .button-preview:hover,
+          .button-preview:focus {
+            background-color: map-get(colors.$colors, "preview");
+            @include text.paragraph-text(
+              0.9rem,
+              600,
+              map-get(colors.$colors, "text-white")
+            );
+          }
+          a.button-detail-restaurant {
+            @include touch-target.base-button();
+            @include touch-target.base-link();
+            @include placement.flex-layout(column, center, center, 0);
+            @include text.paragraph-text(
+              0.8rem,
+              500,
+              map-get(colors.$colors, "text-regular")
+            );
+            letter-spacing: 1px;
+            padding: 0 1rem;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+          }
+          .button-detail-restaurant:hover,
+          .button-detail-restaurant:focus {
+            background-color: map-get(colors.$colors, "detail");
+            @include text.paragraph-text(
+              0.9rem,
+              600,
+              map-get(colors.$colors, "text-white")
+            );
+          }
+        }
+      }
+
+      .button-info {
+        @include touch-target.base-button();
+        background-color: map-get(colors.$colors, "secondary");
+        border-radius: 50%;
+        position: absolute;
+        top: 0.75rem;
+        left: 0.5rem;
+        transition: all 0.3s ease-in-out;
+
+        .info-icon {
+          color: map-get(colors.$colors, "text-white");
+          font-size: 1.75rem;
+        }
+      }
+      .button-info:hover,
+      .button-info:focus {
+        background-color: #b6ad09;
+        transform: scale(0.9);
+      }
+
+      .card-content {
+        @include placement.flex-layout(
+          column,
+          flex-end,
+          flex-start,
+          0.25rem
+        );
+        padding: 1rem;
+        text-align: center;
+
+        h2 {
+          @include text.heading-text(
+            1.25rem,
+            map-get(colors.$colors, "tertiary")
+          );
+          line-height: 2rem;
+          cursor: auto;
+        }
+
+        p {
+          @include text.paragraph-text(
+            0.9rem,
+            500,
+            map-get(colors.$colors, "text-white")
+          );
+          cursor: auto;
+        }
+      }
+    }
+  }
+}

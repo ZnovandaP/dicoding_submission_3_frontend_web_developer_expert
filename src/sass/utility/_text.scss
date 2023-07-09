@@ -1,0 +1,17 @@
+@use "./fonts" as fonts;
+@use "./colors" as colors;
+
+@mixin heading-text($size, $color) {
+  font-family: map-get(fonts.$fonts, "heading"), Georgia, "Times New Roman",
+    Times, serif;
+  font-size: $size;
+  font-weight: bold;
+  color: $color;
+}
+
+@mixin paragraph-text($size, $weight,$color) {
+  font-family: map-get(fonts.$fonts, "text"), Arial, Helvetica, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}

@@ -1,0 +1,133 @@
+@use "../utility/reset";
+@use "../utility/colors" as colors;
+@use "../utility/fonts" as fonts;
+@use "../utility/placement";
+@use "../utility/text";
+@use "../utility/touch-target";
+@use "../utility/shadow";
+@use "../utility/breakpoints";
+@use "../component/button";
+
+main {
+  .prologue {
+    @include placement.grid-layout(1, 1.2rem);
+    padding: 2rem 1rem;
+    // breakpoints
+    @include breakpoints.breakpoints("lg") {
+      @include placement.grid-layout(2, 1.2rem);
+      padding: 1.75rem;
+    }
+
+    .image-prologue {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      @include shadow.box-shadow("md", map-get(colors.$colors, "text-regular"));
+
+      .prologue-image {
+        width: 100%;
+        height: 16rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease-in-out;
+        // breakpoints
+        @include breakpoints.breakpoints("sm") {
+          height: 18rem;
+        }
+        @include breakpoints.breakpoints("md") {
+          height: 22rem;
+        }
+      }
+
+      .overlay {
+        @include placement.flex-layout(column, flex-end, flex-start, 0);
+        position: absolute;
+        top: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.85) 20%,
+          rgba(255, 255, 255, 0.2) 90%
+        );
+        width: 100%;
+        height: 100%;
+        border-radius: 0.75rem;
+
+        .title {
+          padding: 1rem;
+          @include placement.flex-layout(column, flex-end, flex-start, 0.25rem);
+
+          h2 {
+            @include text.heading-text(
+              1.25rem,
+              map-get(colors.$colors, "tertiary")
+            );
+          }
+
+          p {
+            @include placement.flex-layout(row, flex-start, center, .25rem);
+            @include text.paragraph-text(
+              0.75rem,
+              400,
+              map-get(colors.$colors, "text-white")
+            );
+
+            a {
+              @include touch-target.base-link();
+              @include text.paragraph-text(
+                0.75rem,
+                500,
+                map-get(colors.$colors, "text-white")
+              );
+              transition: all 0.3s ease-in-out;
+            }
+            a:focus,
+            a:hover {
+              text-decoration: underline;
+              font-weight: 900;
+            }
+          }
+        }
+      }
+    }
+
+    .text-prologue {
+      // breakpoints
+      @include breakpoints.breakpoints("lg") {
+        @include placement.flex-layout(column, center, center, 0.25rem);
+      }
+
+      h2 {
+        @include text.heading-text(
+          1.75rem,
+          map-get(colors.$colors, "secondary")
+        );
+        line-height: 2.5rem;
+        @include breakpoints.breakpoints("sm") {
+          font-size: 2rem;
+        }
+      }
+
+      p::first-letter {
+        @include text.heading-text(1.2rem, map-get(colors.$colors, "primary"));
+      }
+
+      p {
+        @include text.paragraph-text(
+          0.8rem,
+          500,
+          map-get(colors.$colors, "text-regular")
+        );
+        line-height: 1.2rem;
+        text-indent: 2rem;
+        hyphens: auto;
+        text-align: justify;
+        // breakpoints
+        @include breakpoints.breakpoints("md") {
+          font-size: 0.9rem;
+          line-height: 1.5rem;
+        }
+      }
+    }
+  }
+}
