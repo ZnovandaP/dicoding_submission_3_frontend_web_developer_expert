@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unresolved
-import prologueImage from '../../../public/images/other/prologue.jpg?sizes[]=425,sizes[]=768';
+import prologueImage from '../../../public/images/other/prologue.jpg?sizes[]=350,sizes[]=768';
 
 // eslint-disable-next-line import/no-unresolved
-import prologueImageWebp from '../../../public/images/other/prologue.jpg?sizes[]=425,sizes[]=768&format=webp';
+import prologueImageWebp from '../../../public/images/other/prologue.jpg?sizes[]=350,sizes[]=768&format=webp';
 
 import createSourceElement from './helper/create-source-element';
 

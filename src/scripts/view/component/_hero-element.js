@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unresolved
-import heroImage from '../../../public/images/hero/hero-image.jpg?sizes[]=425,sizes[]=768,sizes[]=1024';
+import heroImage from '../../../public/images/hero/hero-image.jpg?sizes[]=800,sizes[]=1024,sizes[]=1200';
 
 // eslint-disable-next-line import/no-unresolved
-import heroImageWebp from '../../../public/images/hero/hero-image.jpg?sizes[]=425,sizes[]=768,sizes[]=1024&format=webp';
+import heroImageWebp from '../../../public/images/hero/hero-image.jpg?sizes[]=800,sizes[]=1024,sizes[]=1200&format=webp';
 
 import element from '../../utilities/get-element';
 import createSourceElement from './helper/create-source-element';
@@ -17,6 +17,7 @@ class HeroElement extends HTMLElement {
   connectedCallback() {
     this._render();
     this._goToPrologue();
+    console.log(createSourceElement(heroImage));
   }
 
   _render() {
